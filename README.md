@@ -35,3 +35,4 @@ O desenvolvimento do desafio foi organizado nas seguintes etapas:
 
 # Estrutura do repositório
 
+- Questão 3 — Visualizações: Painel desenvolvido no Power BI com comparação entre valores empenhados e liquidados, disponível em PDF.
