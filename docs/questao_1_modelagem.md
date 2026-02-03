@@ -4,7 +4,7 @@ A modelagem de dados foi construída a partir do fluxo da despesa pública, cons
 
 O empenho foi definido como a entidade central do modelo, pois representa o início da despesa pública e está diretamente relacionado às etapas seguintes.
 
-As tabelas de liquidação e pagamento foram associadas ao empenho por meio do identificador do empenho, permitindo acompanhar a execução da despesa desde a reserva do recurso até o pagamento final.
+As tabelas de liquidação e pagamento foram associadas ao empenho por meio do identificador do empenho, estabelecendo relacionamentos do tipo um para muitos (1:N), porque que um empenho pode possuir múltiplas liquidações e múltiplos pagamentos ao longo do tempo.
 
 Não foram criadas tabelas auxiliares neste modelo. O foco foi representar o fluxo principal da despesa pública, e informações como entidade, contrato e credor foram mantidas como atributos da tabela de empenho, sendo suficientes para as análises propostas.
 

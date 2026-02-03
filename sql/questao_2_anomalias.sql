@@ -1,7 +1,9 @@
+-- =========================================================
 -- Pergunta 1:
 -- Existem pagamentos sem empenho correspondente?
 -- Resultado: Nenhum registro encontrado.
 -- Interpretação: Todos os pagamentos possuem empenho associado.
+-- =========================================================
 
 SELECT 
   p.id_pagamento,
@@ -13,10 +15,12 @@ LEFT JOIN empenho e
   ON p.id_empenho = e.id_empenho
 WHERE e.id_empenho IS NULL;
 
+-- =========================================================
 -- Pergunta 2:
 -- Existem liquidações sem empenho correspondente?
 -- Resultado: Nenhum registro encontrado.
 -- Interpretação: Todas as liquidações possuem empenho associado.
+-- =========================================================
 
 SELECT
   l.id_liquidacao_empenhonotafiscal,
@@ -28,11 +32,13 @@ LEFT JOIN empenho e
   ON l.id_empenho = e.id_empenho
 WHERE e.id_empenho IS NULL;
 
+-- =========================================================
 -- Pergunta 3:
 -- O valor total liquidado é maior que o valor empenhado?
--- Resultado: Foram encontrados casos em que a soma das liquidações supera o valor empenhado.
--- Interpretação: Esses registros podem indicar inconsistência nos dados ou a necessidade
--- de análise complementar do processo de empenho.
+-- Resultado: Foram encontrados casos em que a soma das liquidações
+-- supera o valor empenhado.
+-- Interpretação: Possíveis inconsistências ou necessidade de análise
+-- =========================================================
 
 SELECT
   e.id_empenho,
@@ -42,13 +48,15 @@ FROM empenho e
 JOIN liquidacao_nota_fiscal l
   ON e.id_empenho = l.id_empenho
 GROUP BY e.id_empenho, e.valor
-HAVING SUM(l.valor) > e.valor;
+HAVING SUM(l.valor) > e.valor
+ORDER BY valor_liquidado DESC;
 
+-- =========================================================
 -- Pergunta 4:
 -- O valor pago é maior que o valor liquidado?
 -- Resultado: Nenhum registro encontrado.
--- Interpretação: Os pagamentos respeitam o valor liquidado, indicando consistência
--- no fluxo de liquidação e pagamento.
+-- Interpretação: Os pagamentos respeitam os valores liquidados.
+-- =========================================================
 
 SELECT
   e.id_empenho,
@@ -62,11 +70,12 @@ JOIN pagamento p
 GROUP BY e.id_empenho
 HAVING SUM(p.valor) > SUM(l.valor);
 
+-- =========================================================
 -- Pergunta 5:
 -- Existem empenhos com pagamento registrado, mas sem liquidação?
--- Resultado: Foram encontrados empenhos com pagamento sem liquidação associada.
--- Interpretação: Esses casos podem indicar falha de registro ou inconsistência
--- no fluxo da despesa pública.
+-- Resultado: Foram encontrados registros.
+-- Interpretação: Possíveis falhas de registro ou defasagem entre sistemas.
+-- =========================================================
 
 SELECT DISTINCT
   p.id_empenho

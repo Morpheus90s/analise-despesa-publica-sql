@@ -2,38 +2,65 @@
 
 Nesta etapa, foi realizada uma análise exploratória dos dados com o objetivo de identificar possíveis inconsistências no fluxo da despesa pública, considerando as etapas de empenho, liquidação e pagamento.
 
-As análises foram guiadas por regras básicas do processo de execução da despesa pública e não têm como objetivo afirmar a existência de fraude, mas sim levantar possíveis pontos de atenção nos dados.
+As análises foram guiadas pelas regras básicas do processo de execução da despesa pública e têm como objetivo levantar pontos de atenção nos dados. Os resultados apresentados não têm o objetivo de afirmar a existência de fraude, mas sim de indicar situações que podem demandar análises complementares.
 
 # Pagamentos sem empenho correspondente
 
-Foi analisado se existiam pagamentos registrados sem um empenho correspondente, o que não é permitido no fluxo regular da despesa pública.
+**Pergunta:**  
+Existem pagamentos registrados sem um empenho correspondente?
 
-A consulta não retornou registros, indicando que todos os pagamentos possuem um empenho associado.
+**Resultado:**  
+A consulta não retornou registros.
+
+**Interpretação:**  
+O resultado indica que todos os pagamentos presentes na base possuem um empenho associado, o que está de acordo com o fluxo regular da despesa pública.
 
 # Liquidações sem empenho correspondente
 
-Também foi verificado se existiam liquidações sem empenho associado.
+**Pergunta:**  
+Existem liquidações sem empenho associado?
 
-A análise não retornou resultados, mostrando que todas as liquidações presentes na base possuem empenho correspondente.
+**Resultado:**  
+A análise não retornou registros.
+
+**Interpretação:**  
+Todas as liquidações presentes na base estão corretamente associadas a um empenho, indicando consistência nessa etapa do fluxo.
 
 # Liquidações acima do valor empenhado
 
-Foi realizada uma análise para verificar se o valor total liquidado ultrapassa o valor originalmente empenhado.
+**Pergunta:**  
+O valor total liquidado ultrapassa o valor originalmente empenhado?
 
-A consulta identificou diversos casos em que a soma das liquidações é maior que o valor empenhado. Esses registros indicam possíveis inconsistências nos dados ou a necessidade de análises complementares, como a existência de empenhos adicionais não representados na base.
+**Resultado:**  
+Foram identificados diversos casos em que a soma das liquidações é superior ao valor empenhado.
+
+**Interpretação:**  
+Esses registros indicam possíveis inconsistências nos dados ou a necessidade de análises adicionais, como a existência de empenhos complementares não representados na base utilizada no desafio.
 
 # Pagamentos acima do valor liquidado
 
-Também foi analisado se o valor total pago era maior que o valor liquidado, o que não é permitido no fluxo da despesa pública.
+**Pergunta:**  
+O valor total pago é maior que o valor liquidado?
 
-A consulta não retornou resultados, indicando que os pagamentos respeitam os valores liquidados.
+**Resultado:**  
+A consulta não retornou registros.
+
+**Interpretação:**  
+Os pagamentos respeitam os valores liquidados, o que indica conformidade nessa etapa do fluxo.
 
 # Pagamentos sem liquidação registrada
 
-Por fim, foi investigada a existência de pagamentos registrados sem a respectiva liquidação.
+**Pergunta:**  
+Existem pagamentos registrados sem liquidação associada?
 
-Foram identificados alguns empenhos com pagamento registrado, mas sem liquidação associada. Esses casos podem indicar falhas de registro ou inconsistências na base de dados utilizada para o desafio.
+**Resultado:**  
+Foram identificados alguns empenhos com pagamento registrado, mas sem liquidação correspondente.
+
+**Interpretação:**  
+Esses casos podem indicar falhas de registro, defasagens entre os sistemas ou inconsistências na base de dados utilizada para a análise.
 
 # Considerações finais
 
-De forma geral, os dados apresentam consistência em grande parte do fluxo da despesa pública. No entanto, algumas inconsistências foram identificadas, principalmente na relação entre empenhos e liquidações, o que reforça a importância de análises exploratórias para apoiar auditorias e tomadas de decisão.
+De forma geral, os dados apresentam consistência na maior parte do fluxo da despesa pública. No entanto, algumas inconsistências foram identificadas, especialmente na relação entre empenhos e liquidações.
+
+Esses achados reforçam a importância de análises exploratórias para apoiar processos de auditoria, monitoramento de gastos públicos e tomada de decisão baseada em dados.
