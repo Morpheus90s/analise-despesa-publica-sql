@@ -30,13 +30,13 @@ SELECT
     p.id_pagamento,
     p.id_empenho,
     p.valor AS valor_pago,
-    p.datapagamentoempenho
+    p.data_pagamento
 FROM pagamento AS p
 LEFT JOIN empenho AS e
     ON p.id_empenho = e.id_empenho
 WHERE e.id_empenho IS NULL
 ORDER BY
-    p.datapagamentoempenho,
+    p.data_pagamento,
     p.id_pagamento;
 
 
@@ -204,8 +204,8 @@ WITH pagamentos AS (
         id_empenho,
         COUNT(*) AS quantidade_pagamentos,
         SUM(valor) AS valor_pago,
-        MIN(datapagamentoempenho) AS primeiro_pagamento,
-        MAX(datapagamentoempenho) AS ultimo_pagamento
+        MIN(data_pagamento) AS primeiro_pagamento,
+        MAX(data_pagamento) AS ultimo_pagamento
     FROM pagamento
     GROUP BY id_empenho
 )
