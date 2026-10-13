@@ -1,73 +1,164 @@
-# Desafio – Estágio em Dados & Analytics
+# Análise de Despesas Públicas com SQL e PostgreSQL
 
-Este repositório contém a resolução do desafio técnico para o processo seletivo de Estágio em Dados & Analytics.
+Projeto de análise de dados voltado ao estudo da execução da despesa pública, com foco em **modelagem relacional, consultas SQL, investigação de inconsistências e análise temporal**.
 
-O objetivo do desafio é estudar o fluxo de execução da despesa pública, estruturar os dados disponibilizados, realizar análises exploratórias e investigar possíveis inconsistências ou anomalias nos gastos públicos, além de comunicar os principais insights por meio de visualizações.
+O trabalho foi desenvolvido a partir de um desafio técnico de Dados & Analytics e posteriormente ampliado com uma base sintética em PostgreSQL para testar consultas e validar cenários de inconsistência.
 
-# Contexto do desafio
+## Objetivos do projeto
 
-A execução da despesa pública segue um fluxo bem definido, composto principalmente pelas etapas de:
+- Compreender o fluxo da despesa pública e as relações entre empenhos, liquidações e pagamentos.
+- Estruturar os dados em um modelo relacional adequado às análises.
+- Utilizar SQL para explorar os dados e investigar possíveis inconsistências.
+- Analisar valores e comportamento temporal das despesas.
+- Documentar a metodologia, as consultas e os resultados de forma reproduzível.
 
-- **Empenho**
-- **Liquidação**
-- **Pagamento**
+## Competências demonstradas
 
-Com base nesse fluxo e nas bases de dados fornecidas (compras públicas e execução orçamentária), este projeto busca compreender a relação entre essas etapas e analisar o comportamento das despesas públicas.
+- **SQL e PostgreSQL:** consultas analíticas, agregações, subconsultas e CTEs.
+- **Modelagem de dados:** representação das relações entre entidades e etapas da despesa pública.
+- **Qualidade e consistência dos dados:** identificação de registros sem correspondência e comparação de valores entre etapas.
+- **Análise temporal:** agregação de valores por mês e ano.
+- **Visualização de dados:** representação gráfica e comunicação de resultados.
+- **Documentação técnica:** organização de consultas, explicações e relatório final.
 
-# Abordagem adotada
+## Contexto do problema
 
-O desenvolvimento do desafio foi organizado nas seguintes etapas:
+A execução da despesa pública envolve três etapas fundamentais:
 
-1. **Entendimento do negócio**  
-   Estudo do fluxo da despesa pública e das relações entre empenhos, liquidações e pagamentos, com base em materiais oficiais.
+1. **Empenho:** reserva de recursos orçamentários para uma despesa.
+2. **Liquidação:** verificação do direito do credor a receber, conforme a entrega do bem ou a prestação do serviço.
+3. **Pagamento:** quitação da obrigação financeira.
 
-2. **Modelagem de dados**  
-   Construção de um modelo relacional simples e consistente, alinhado com os dados fornecidos e com o objetivo analítico do desafio.
+A análise dessas etapas permite investigar como os valores se relacionam ao longo do processo e identificar registros que merecem verificação.
 
-3. **Análise exploratória e investigação de anomalias**  
-   Elaboração de questionamentos e consultas SQL para identificar possíveis inconsistências, falhas de registro ou padrões relevantes.
+## Desenvolvimento
 
-4. **Visualização de dados**  
-   Criação de visualizações para comunicar os principais insights encontrados de forma clara e objetiva.
+### 1. Modelagem de dados
 
-# Estrutura do repositório
+Foi elaborado um modelo relacional para representar as informações envolvidas na execução da despesa pública e apoiar as consultas analíticas.
 
-##  Fluxo da Despesa Pública
+- [Diagrama do modelo de dados](modelagem/modelo_dados.png)
+- [Descrição da modelagem](docs/questao_1_modelagem.md)
+- [Arquivo complementar do modelo](modelagem/diagrama.md)
 
-Uma breve contextualização sobre o fluxo legal da despesa pública (empenho, liquidação e pagamento), utilizada como base conceitual para as análises, está disponível em:
+### 2. Análise exploratória e investigação de inconsistências
 
-- `docs/fluxo_despesa_publica.md`
+Foram desenvolvidas consultas SQL para investigar situações como:
 
+- Pagamentos sem empenho correspondente.
+- Liquidações sem empenho correspondente.
+- Valores liquidados superiores ao valor empenhado.
+- Valores pagos superiores aos valores liquidados.
+- Empenhos com pagamentos registrados, mas sem liquidações correspondentes.
+- Consolidação dos valores por empenho para apoiar a análise.
 
-## Questão 1 — Modelagem de Dados
+As consultas foram organizadas para facilitar a inspeção dos registros e a investigação de possíveis problemas de consistência.
 
-- Diagrama relacional disponível em:  
-  `modelagem/modelo_dados.png`
-- Explicação da modelagem em:  
-  `docs/questao_1_modelagem.md`
+- [Consultas SQL de investigação](sql/questao_2_anomalias.sql)
+- [Análise e conclusões documentadas](docs/questao_2_analise.md)
 
-## Questão 2 — Análise Exploratória e Investigação de Anomalias
+### 3. Análise temporal
 
-- Questionamentos, análises e conclusões documentados em:  
-  `docs/questao_2_analise.md`
-- Consultas SQL utilizadas disponíveis em:  
-  `sql/questao_2_anomalias.sql`
+Foram desenvolvidas consultas para explorar a distribuição temporal dos registros, incluindo:
 
-## Questão 3 — Visualizações
+- Intervalos de datas disponíveis em cada etapa.
+- Valores agregados mensalmente para empenhos, liquidações e pagamentos.
+- Consolidações anuais por etapa.
+- Distribuição dos valores empenhados por entidade.
 
-As visualizações foram desenvolvidas no **Power BI**, utilizando dados extraídos do banco PostgreSQL via DBeaver e importados localmente em arquivos CSV.
+- [Consultas de análise temporal](sql/questao_4_historico_temporal.sql)
+- [Consultas de exploração inicial](sql/exploracao_inicial.sql)
 
-- Arquivo do dashboard:  
-  `visualizacoes/questao_3_visualizacao.pbix`
-- Descrição das visualizações e insights em:  
-  `docs/questao_3_visualizacao.md`
+### 4. Visualização de dados
 
-## Relatório Técnico Final
+O projeto também inclui uma visualização comparativa dos valores empenhados e liquidados, acompanhada da documentação sobre as visualizações desenvolvidas no desafio.
 
-O relatório técnico consolidando o entendimento do negócio, a modelagem, as análises realizadas e os principais insights encontra-se em:
+- [Visualização: empenhado versus liquidado](visualizacoes/comparacao_empenhado_liquidado.png)
+- [Descrição das visualizações](docs/questao_3_visualizacoes.md)
 
-- `docs/relatorio_final.pdf`
+### 5. Testes e validação das consultas
 
-## Observações técnicas
+Para permitir a execução e a verificação das consultas sem depender da base original do desafio, foi criada uma base sintética em PostgreSQL.
 
-Devido a limitações de conexão direta do Power BI com o banco de dados remoto, os dados foram exportados via DBeaver e utilizados localmente para a construção das visualizações.
+Os registros de teste incluem cenários controlados de inconsistência, como pagamentos e liquidações sem empenho correspondente. Esses casos permitem verificar se as consultas identificam as situações previstas.
+
+- [Script de criação da base de teste](sql/00_base_teste.sql)
+- [Script de testes e validação](sql/01_testes_validacao.sql)
+
+**Importante:** os dados dessa base são sintéticos e têm finalidade de teste. Eles não representam despesas públicas reais nem devem ser interpretados como resultados da análise original.
+
+## Tecnologias e ferramentas
+
+| Tecnologia ou ferramenta | Aplicação no projeto |
+|---|---|
+| SQL | Consultas, agregações e investigação de inconsistências |
+| PostgreSQL | Armazenamento e execução das consultas |
+| Docker | Ambiente isolado para execução do banco de teste |
+| Git e GitHub | Versionamento e organização do projeto |
+| Power BI | Visualização de dados no contexto do desafio |
+| DBeaver | Consulta e exportação de dados, conforme a abordagem documentada |
+
+## Como executar os testes
+
+Os passos abaixo pressupõem que o Docker esteja instalado e que os comandos sejam executados na raiz do repositório.
+
+**1. Inicie um banco PostgreSQL de teste**
+
+```bash
+docker run --name postgres-despesas \
+  -e POSTGRES_PASSWORD=teste123 \
+  -e POSTGRES_DB=despesas \
+  -p 5432:5432 \
+  -d postgres:16
+```
+
+**2. Execute o script de criação da base sintética**
+
+```bash
+PGPASSWORD=teste123 psql \
+  -h localhost -U postgres -d despesas \
+  -f sql/00_base_teste.sql
+```
+
+**3. Execute os testes de validação**
+
+```bash
+PGPASSWORD=teste123 psql \
+  -h localhost -U postgres -d despesas \
+  -f sql/01_testes_validacao.sql
+```
+
+**4. Execute as consultas analíticas**
+
+Por exemplo, para investigar inconsistências:
+
+```bash
+PGPASSWORD=teste123 psql \
+  -h localhost -U postgres -d despesas \
+  -f sql/questao_2_anomalias.sql
+```
+
+Para executar a análise temporal:
+
+```bash
+PGPASSWORD=teste123 psql \
+  -h localhost -U postgres -d despesas \
+  -f sql/questao_4_historico_temporal.sql
+```
+
+> **Atenção:** o script de criação da base de teste recria as tabelas. Utilize-o somente no banco destinado aos testes, pois ele pode remover estruturas e dados existentes.
+
+## Documentação complementar
+
+- [Fluxo da despesa pública](docs/fluxo_despesa_publica.md)
+- [Relatório técnico final](relatorio_final.pdf)
+
+## Limitações e escopo
+
+A base sintética foi criada para possibilitar testes controlados das consultas. Os resultados obtidos com ela servem para verificar o comportamento do código nos cenários preparados, mas não substituem a validação dos resultados sobre a base original do desafio.
+
+O repositório contém a visualização exportada em imagem e a documentação correspondente. O arquivo editável do dashboard Power BI não está incluído nesta versão.
+
+---
+
+**Autor:** [Morpheus90s](https://github.com/Morpheus90s)
